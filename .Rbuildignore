@@ -1,2 +1,4 @@
+^renv$
+^renv\.lock$
 ^SocialFractal\.Rproj$
 ^\.Rproj\.user$
