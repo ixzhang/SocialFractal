@@ -1,0 +1,12 @@
+#' Example Dataset: zf_rep2_real
+#'
+#' This dataset contains the clumping social networks of zebra finches in Replicate 2 during 30 days.
+#'
+#' @format An array containing:
+#' \describe{
+#'   \item{First/Second dimension}{Individual ID in replicate 2}
+#'   \item{Third dimension}{Days}
+#' }
+#' @source Generated from XYZ
+"zf_rep2_real"
+
