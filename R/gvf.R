@@ -24,7 +24,7 @@ gvf <- function(data, num_breaks) {
   }
 
   # Calculate Jenks breaks using BAMMtools package
-  breaks <- BAMMtools::getJenksBreaks(data, n = num_breaks)
+  breaks <- BAMMtools::getJenksBreaks(data, num_breaks)
 
   # Calculate total sum of squared deviations (sum of squared errors) from the mean
   sdam <- sum((data - mean(data)) ^ 2)
