@@ -4,6 +4,7 @@
 #' The result is a matrix containing breakpoints for each individual at each time point.
 #'
 #' @param social_networks A 3D array with dimensions [individuals, individuals, time points].
+#' @param sex The sex information of the zebra finches in social networks. Default is NA.
 #' @param break_num The number of breaks (clusters) to compute. Default is 3.
 #' @return A matrix containing the ID, time point, and Jenks breakpoints for each individual-time combination.
 #' @export
@@ -11,9 +12,12 @@
 #' @examples
 #' # Example usage:
 #' # Assuming 'social_network_data' is a 3D array with dimensions [individuals, individuals, time]
-#' breakpoints <- get_breakpoints(social_network_data, break_num = 3)
+#' sex.information <- zf_ind$sex[match(dimnames(zf_rep1_real)[[1]], zf_ind$QR)
+#' breakpoints <- get_breakpoints(social_networks = zf_rep1_real, sex = sex.information, break_num = 3)
 #' print(breakpoints)
-get_breakpoints <- function(social_networks, break_num = 3) {
+get_breakpoints <- function(social_networks, sex = NA, break_num = 3) {
+  require(BAMMtools)
+
   # Extract individual IDs and time points from the array's dimension names
   individual_ids <- dimnames(social_networks)[[1]]   # Individuals' identifiers
   time_points <- dimnames(social_networks)[[3]]      # Time points in the data
@@ -26,6 +30,7 @@ get_breakpoints <- function(social_networks, break_num = 3) {
   # Initialize a data.frame to store the results (ID, time, and breakpoints)
   breakpoints_df <- data.frame(
     ID = character(num_time_points * num_individuals),
+    sex = character(num_time_points * num_individuals),
     time = character(num_time_points * num_individuals),
     stringsAsFactors = FALSE
   )
@@ -44,6 +49,7 @@ get_breakpoints <- function(social_networks, break_num = 3) {
 
     # Assign individual IDs and time point to the current block of rows
     breakpoints_df[start_row:end_row, "ID"] <- individual_ids   # Assign individual IDs
+    breakpoints_df[start_row:end_row, "sex"] <- sex
     breakpoints_df[start_row:end_row, "time"] <- time_points[time_idx]  # Assign current time point
 
     # Iterate over each individual within the current time point
@@ -62,7 +68,7 @@ get_breakpoints <- function(social_networks, break_num = 3) {
 
       # Assign the calculated breakpoints to the corresponding row in the data.frame
       current_row <- start_row + individual_idx - 1
-      breakpoints_df[current_row, colnames_jenks] <- jenks_breaks[2:(break_num + 1)]
+      breakpoints_df[current_row, colnames_jenks] <- rev(jenks_breaks[2:(break_num + 1)])
     }
   }
 

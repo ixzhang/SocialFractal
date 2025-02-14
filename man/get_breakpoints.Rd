@@ -4,10 +4,12 @@
 \alias{get_breakpoints}
 \title{Calculate Jenks Breakpoints for Social Network Data}
 \usage{
-get_breakpoints(social_networks, break_num = 3)
+get_breakpoints(social_networks, sex = NA, break_num = 3)
 }
 \arguments{
 \item{social_networks}{A 3D array with dimensions \link{individuals, individuals, time points}.}
+
+\item{sex}{The sex information of the zebra finches in social networks. Default is NA.}
 
 \item{break_num}{The number of breaks (clusters) to compute. Default is 3.}
 }
@@ -21,6 +23,7 @@ The result is a matrix containing breakpoints for each individual at each time p
 \examples{
 # Example usage:
 # Assuming 'social_network_data' is a 3D array with dimensions [individuals, individuals, time]
-breakpoints <- get_breakpoints(social_network_data, break_num = 3)
+sex.information <- zf_ind$sex[match(dimnames(zf_rep1_real)[[1]], zf_ind$QR)
+breakpoints <- get_breakpoints(social_networks = zf_rep1_real, sex = sex.information, break_num = 3)
 print(breakpoints)
 }
