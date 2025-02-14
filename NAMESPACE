@@ -3,4 +3,5 @@
 export(get_breakpoints)
 export(get_breaks_num)
 export(gvf)
+export(multilevel_group_size)
 export(relationship_num)
