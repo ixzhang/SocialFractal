@@ -22,7 +22,7 @@ multilevel_group_size <- function(social_networks) {
   group_size_df <- data.frame()
 
   # Iterate over each time point
-  for (current_time in 1:length(time_points)){
+  for (current_time in 1:length(time_points)) {
     # Extract the current network matrix
     current_network <- social_networks[, , current_time]
     current_network[is.na(current_network)] <- 0
@@ -39,8 +39,10 @@ multilevel_group_size <- function(social_networks) {
       time = time_points[i],
       level = 1:(levels_detected + 1),
       individual_count = clusters_detected$vcount,
-      group_count = c(clusters_detected$vcount,
-                     apply(clusters_detected$memberships, 1, FUN = max))
+      group_count = c(
+        clusters_detected$vcount,
+        apply(clusters_detected$memberships, 1, FUN = max)
+      )
     )
 
     # Calculate group size

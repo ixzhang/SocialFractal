@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' # Example usage:
-#' data <- rnorm(100, mean = 0, sd = 1)  # Generate a numeric vector
+#' data <- rnorm(100, mean = 0, sd = 1) # Generate a numeric vector
 #' gvf_result <- gvf(data, num_breaks = 5)
 #' # Output the result
 gvf <- function(data, num_breaks) {
@@ -27,13 +27,13 @@ gvf <- function(data, num_breaks) {
   breaks <- BAMMtools::getJenksBreaks(data, num_breaks)
 
   # Calculate total sum of squared deviations (sum of squared errors) from the mean
-  sdam <- sum((data - mean(data)) ^ 2)
+  sdam <- sum((data - mean(data))^2)
 
   # Calculate within-group sum of squared deviations
   sdcm <- 0
   for (i in 1:(num_breaks - 1)) {
     subset_data <- data[data > breaks[i] & data <= breaks[i + 1]]
-    sdcm <- sdcm + sum((subset_data - mean(subset_data)) ^ 2)
+    sdcm <- sdcm + sum((subset_data - mean(subset_data))^2)
   }
 
   # Calculate GVF metric

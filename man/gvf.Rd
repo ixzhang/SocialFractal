@@ -22,7 +22,7 @@ original data.
 }
 \examples{
 # Example usage:
-data <- rnorm(100, mean = 0, sd = 1)  # Generate a numeric vector
+data <- rnorm(100, mean = 0, sd = 1) # Generate a numeric vector
 gvf_result <- gvf(data, num_breaks = 5)
 # Output the result
 }
