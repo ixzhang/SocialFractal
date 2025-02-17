@@ -12,12 +12,11 @@
 #' @examples
 #' # Example usage:
 #' # Assuming 'spatial_data' is a data.frame with columns 'id', 'x', 'y', 'time'
-#' library(reshape2)
-#' cr_matrix <- clumping_rate(spatial_data, individuals = unique(spatial_data$id), threshold = 10)
+#' data(raw_data)
+#' data(zf_ind)
+#' cr_matrix <- clumping_rate(raw_data, individuals = zf_ind$Ind_ID[zf_ind$Replicate == 1], threshold = 75)
 #' print(cr_matrix)
 clumping_rate <- function(data, individuals, threshold) {
-  require(reshape2)
-
   # Extract unique time points and split data by time
   time_points <- unique(data$time)
 
