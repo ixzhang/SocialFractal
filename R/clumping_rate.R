@@ -42,10 +42,10 @@ clumping_rate <- function(data, individuals, threshold) {
 
     if (nrow(current_data) > 1) {
       # Remove duplicate IDs and order by ID
-      current_data <- current_data[!duplicated(current_data$id)]
+      current_data <- current_data[!duplicated(current_data$id), ]
 
       rownames(current_data) <- current_data$id
-      current_data <- current_data[order(current_data$id)]
+      current_data <- current_data[order(current_data$id), ]
 
       # Compute pairwise Euclidean distances
       distance_matrix <- as.matrix(dist(current_data[, c("x", "y")]))
@@ -57,11 +57,11 @@ clumping_rate <- function(data, individuals, threshold) {
       # Handle missing individuals by subsetting
       if (any(is.na(position_map))) {
         distance_matrix <- distance_matrix[!is.na(position_map), !is.na(position_map)]
-        position_map <- individual_df$order[match(as.numeric(rownames(data_time_distance)), individuals)]
+        position_map <- individual_map$order[match(as.numeric(rownames(distance_matrix)), individuals)]
       }
 
       # Assign the distance matrix to the social network array
-      social_networks[position_map, position_map, time] <- data_time_distance
+      social_networks[position_map, position_map, time_idx] <- distance_matrix
     }
   }
 
