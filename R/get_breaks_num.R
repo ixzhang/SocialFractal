@@ -1,28 +1,33 @@
 #' Find the appropriate number of breaks using Jenks natural breaks optimization
 #'
-#' This function optimizes the number of breaks for a given dataset using the Jenks natural breaks algorithm.
-#' It iterates over different numbers of breaks and calculates the Goodness of Variance Fit (GVF) for each combination of individual and time point.
-#' The GVF metric helps determine the number of breaks that best represents the data structure while minimizing variance within groups.
+#' This function optimizes the number of breaks for a given dataset using the
+#' Jenks natural breaks algorithm.
+#' It iterates over different numbers of breaks and calculates the Goodness of
+#' Variance Fit (GVF) for each combination of individual and time point.
+#' The GVF metric helps determine the number of breaks that best represents the
+#' data structure while minimizing variance within groups.
 #'
 #' @param social_networks A 3D array containing social network data over time.
-#'                       Dimensions are individuals (first/second dimension), and time points (third dimension).
+#'                       Dimensions are individuals (first/second dimension),
+#'                       and time points (third dimension).
 #' @param max_breaks The maximum number of breaks to consider. Default is 5.
-#' @return A data frame containing the GVF values for different numbers of breaks across individuals and time points.
+#' @return A data frame containing the GVF values for different numbers of
+#' breaks across individuals and time points.
 #' @export
 #'
 #' @examples
 #' # Example usage:
-#' # Assuming 'social_network_data' is a 3D array with dimensions [individuals, individuals, time]
+#' # Assuming 'social_network_data' is a 3D array with dimensions
+#' [individuals, individuals, time]
 #' result <- get_breaks_num(social_network_data, max_breaks = 5)
 #' # Explore the results to determine the optimal number of breaks
 get_breaks_num <- function(social_networks, max_breaks = 5) {
   # Extract unique individual IDs and time points from the array dimension names
   individual_ids <- dimnames(social_networks)[[1]]
   time_points <- dimnames(social_networks)[[3]]
-  num_time_points <- length(time_points)
-  num_individuals <- length(individual_ids)
 
-  # Generate a data frame to store GVF values for each combination of individual, time point, and breaks
+  # Generate a data frame to store GVF values for each combination
+  # of individual, time point, and breaks
   result_df <- expand.grid(
     ID = individual_ids,
     breaks = 1:max_breaks,
@@ -39,7 +44,8 @@ get_breaks_num <- function(social_networks, max_breaks = 5) {
       data_vector <- social_networks[individual_idx, -individual_idx, time_idx]
       # Calculate GVF for each possible number of breaks
       for (breaks in 3:(max_breaks + 2)) {
-        # Find the row in result_df that matches the current ID, breaks, and time
+        # Find the row in result_df that matches the current ID,
+        # breaks, and time
         row_index <- which(
           result_df$ID == current_id &
             result_df$breaks == breaks - 2 &

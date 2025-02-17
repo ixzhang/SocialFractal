@@ -1,6 +1,7 @@
 #' Example Dataset: zf_rep3_real
 #'
-#' This dataset contains the clumping social networks of zebra finches in Replicate 3 during 30 days.
+#' This dataset contains the clumping social networks of
+#' zebra finches in Replicate 3 during 30 days.
 #'
 #' @format An array containing:
 #' \describe{

@@ -1,15 +1,20 @@
 #' Calculate Multilevel Group Size from Social Networks
 #'
-#' This function computes the group size across different hierarchical levels for a social network evolving over time.
-#' It uses the Louvain community detection algorithm to identify communities at each time point and calculates group sizes based on the membership structure.
+#' This function computes the group size across different hierarchical levels
+#' for a social network evolving over time.
+#' It uses the Louvain community detection algorithm to identify communities at
+#' each time point and calculates group sizes based on the membership structure.
 #'
-#' @param social_networks A 3D array containing social network data. Dimensions: [individuals, connections, time].
-#' @return A data.frame with columns for time, level, individual_num, group_num, and group_size (individual_num / group_num).
+#' @param social_networks A 3D array containing social network data. Dimensions:
+#' [individuals, connections, time].
+#' @return A data.frame with columns for time, level, individual_num, group_num,
+#' and group_size (individual_num / group_num).
 #' @export
 #'
 #' @examples
 #' # Example usage:
-#' # Assuming 'social_network_data' is a 3D array with dimensions [individuals, individuals, time]
+#' # Assuming 'social_network_data' is a 3D array with dimensions
+#' # [individuals, individuals, time]
 #' group_sizes <- multilevel_group_size(social_network_data)
 #' print(group_sizes)
 multilevel_group_size <- function(social_networks) {
@@ -22,13 +27,14 @@ multilevel_group_size <- function(social_networks) {
   group_size_df <- data.frame()
 
   # Iterate over each time point
-  for (current_time in 1:length(time_points)) {
+  for (current_time in seq_along(time_points)) {
     # Extract the current network matrix
     current_network <- social_networks[, , current_time]
     current_network[is.na(current_network)] <- 0
 
     # Create an igraph graph object
-    current_graph <- graph.adjacency(current_network, mode = "undirected", weighted = TRUE)
+    current_graph <- graph.adjacency(current_network, mode = "undirected",
+                                     weighted = TRUE)
 
     # Detect communities using the Louvain algorithm
     clusters_detected <- cluster_louvain(current_graph)
@@ -36,7 +42,7 @@ multilevel_group_size <- function(social_networks) {
 
     # The data frame of group size in current network
     gs_df <- data.frame(
-      time = time_points[i],
+      time = time_points[current_time],
       level = 1:(levels_detected + 1),
       individual_count = clusters_detected$vcount,
       group_count = c(
@@ -51,5 +57,5 @@ multilevel_group_size <- function(social_networks) {
     group_size_df <- rbind(group_size_df, gs_df)
   }
 
-  return(group_size_df)
+  group_size_df
 }

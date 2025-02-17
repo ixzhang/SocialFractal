@@ -1,11 +1,15 @@
 #' Calculate Clumping Rate in Social Networks
 #'
-#' This function calculates the clumping rate in a social network based on spatial proximity over time.
-#' The clumping rate is defined as the ratio of interactions within a given threshold to the total number of interactions.
+#' This function calculates the clumping rate in a social network based on
+#' spatial proximity over time.
+#' The clumping rate is defined as the ratio of interactions within a given
+#' threshold to the total number of interactions.
 #'
-#' @param data A data.frame containing spatial coordinates and time information. Columns: id, x, y, time.
+#' @param data A data.frame containing spatial coordinates and time information.
+#' Columns: id, x, y, time.
 #' @param individuals A vector of unique individual identifiers.
-#' @param threshold The spatial threshold (in the units of x and y) to determine close contacts.
+#' @param threshold The spatial threshold (in the units of x and y) to
+#' determine close contacts.
 #' @return A matrix representing the clumping rate between individuals.
 #' @export
 #'
@@ -14,7 +18,9 @@
 #' # Assuming 'spatial_data' is a data.frame with columns 'id', 'x', 'y', 'time'
 #' data(raw_data)
 #' data(zf_ind)
-#' cr_matrix <- clumping_rate(raw_data, individuals = zf_ind$Ind_ID[zf_ind$Replicate == 1], threshold = 75)
+#' cr_matrix <- clumping_rate(raw_data,
+#' individuals = zf_ind$Ind_ID[zf_ind$Replicate == 1],
+#' threshold = 75)
 #' print(cr_matrix)
 clumping_rate <- function(data, individuals, threshold) {
   # Extract unique time points and split data by time
@@ -32,12 +38,14 @@ clumping_rate <- function(data, individuals, threshold) {
   )
 
   # Initialize a 3D array to store social network data across time
-  social_networks <- array(NA, dim = c(n_individuals, n_individuals, length(time_points)))
+  social_networks <- array(NA, dim = c(
+    n_individuals, n_individuals, length(time_points)
+  ))
   rownames(social_networks) <- individuals
   colnames(social_networks) <- individuals
 
   # Populate the social network array with distance matrices for each time point
-  for (time_idx in 1:length(time_points)) {
+  for (time_idx in seq_along(time_points)) {
     current_data <- data_list[[time_idx]]
 
     if (nrow(current_data) > 1) {
@@ -52,12 +60,18 @@ clumping_rate <- function(data, individuals, threshold) {
       diag(distance_matrix) <- NA
 
       # Map row indices to the global individual order
-      position_map <- individual_map$order[match(as.numeric(rownames(distance_matrix)), individuals)]
+      position_map <- individual_map$order[match(
+        as.numeric(rownames(distance_matrix)), individuals
+      )]
 
       # Handle missing individuals by subsetting
       if (any(is.na(position_map))) {
-        distance_matrix <- distance_matrix[!is.na(position_map), !is.na(position_map)]
-        position_map <- individual_map$order[match(as.numeric(rownames(distance_matrix)), individuals)]
+        distance_matrix <- distance_matrix[
+          !is.na(position_map), !is.na(position_map)
+        ]
+        position_map <- individual_map$order[match(
+          as.numeric(rownames(distance_matrix)), individuals
+        )]
       }
 
       # Assign the distance matrix to the social network array
@@ -81,5 +95,5 @@ clumping_rate <- function(data, individuals, threshold) {
   # Calculate the clumping rate matrix
   clumping_matrix <- close_sum / any_sum
 
-  return(clumping_matrix)
+  clumping_matrix
 }
