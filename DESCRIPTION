@@ -1,11 +1,15 @@
 Package: SocialFractal
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Analyze Multilevel Social Network and Fractal Egocentric Network Structures
+Version: 0.1.0
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    c(person("Yixuan", "Zhang", , "yxuan_zhang@outlook.com", role = c("aut", "cre")),
+      person("Daiping", "Wang", , "wangdaiping@ioz.ac.cn", role = "aut"),
+      person("Damien", "Farine", , "damien.farine@ieu.uzh.ch", role = "aut"))
+Description: This package provides tools for analyzing multilevel social network and 
+    fractal egocentric network structures, including functions to compute clumping rates, 
+    calculate group sizes, and detect communities. It leverages network analysis techniques 
+    to quantify the hierarchical organization of social interactions.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
