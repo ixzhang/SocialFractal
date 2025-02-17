@@ -79,7 +79,8 @@ get_breakpoints <- function(social_networks, sex = NA, break_num = 3) {
       # interaction values
       # Note: The function 'getJenksBreaks' returns 'break_num + 2' breakpoints
       # we extract the middle ones
-      jenks_breaks <- getJenksBreaks(interaction_values, break_num + 2)
+      jenks_breaks <- BAMMtools::getJenksBreaks(interaction_values,
+                                                break_num + 2)
 
       # Assign the calculated breakpoints to the corresponding row
       # in the data.frame

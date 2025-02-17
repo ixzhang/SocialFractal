@@ -33,11 +33,12 @@ multilevel_group_size <- function(social_networks) {
     current_network[is.na(current_network)] <- 0
 
     # Create an igraph graph object
-    current_graph <- graph.adjacency(current_network, mode = "undirected",
-                                     weighted = TRUE)
+    current_graph <- igraph::graph.adjacency(current_network,
+                                             mode = "undirected",
+                                             weighted = TRUE)
 
     # Detect communities using the Louvain algorithm
-    clusters_detected <- cluster_louvain(current_graph)
+    clusters_detected <- igraph::cluster_louvain(current_graph)
     levels_detected <- nrow(clusters_detected$memberships)
 
     # The data frame of group size in current network
