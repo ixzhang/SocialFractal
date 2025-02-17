@@ -12,20 +12,20 @@
 #' @examples
 #' # Example usage:
 #' # Assuming 'social_network_data' is a 3D array with dimensions [individuals, individuals, time]
-#' sex.information <- zf_ind$sex[match(dimnames(zf_rep1_real)[[1]], zf_ind$QR)
+#' sex.information <- zf_ind$sex[match(dimnames(zf_rep1_real)[[1]], zf_ind$QR)]
 #' breakpoints <- get_breakpoints(social_networks = zf_rep1_real, sex = sex.information, break_num = 3)
 #' print(breakpoints)
 get_breakpoints <- function(social_networks, sex = NA, break_num = 3) {
   require(BAMMtools)
 
   # Extract individual IDs and time points from the array's dimension names
-  individual_ids <- dimnames(social_networks)[[1]]   # Individuals' identifiers
-  time_points <- dimnames(social_networks)[[3]]      # Time points in the data
-  num_time_points <- length(time_points)            # Total number of time points
-  num_individuals <- length(individual_ids)         # Total number of individuals
+  individual_ids <- dimnames(social_networks)[[1]] # Individuals' identifiers
+  time_points <- dimnames(social_networks)[[3]] # Time points in the data
+  num_time_points <- length(time_points) # Total number of time points
+  num_individuals <- length(individual_ids) # Total number of individuals
 
   # Generate dynamic column names for Jenks breakpoints
-  colnames_jenks <- paste0("jenk", 1:break_num)      # Column names for breakpoints (e.g., jenk1, jenk2, ...)
+  colnames_jenks <- paste0("jenk", 1:break_num) # Column names for breakpoints (e.g., jenk1, jenk2, ...)
 
   # Initialize a data.frame to store the results (ID, time, and breakpoints)
   breakpoints_df <- data.frame(
@@ -48,9 +48,9 @@ get_breakpoints <- function(social_networks, sex = NA, break_num = 3) {
     end_row <- num_individuals * time_idx
 
     # Assign individual IDs and time point to the current block of rows
-    breakpoints_df[start_row:end_row, "ID"] <- individual_ids   # Assign individual IDs
+    breakpoints_df[start_row:end_row, "ID"] <- individual_ids # Assign individual IDs
     breakpoints_df[start_row:end_row, "sex"] <- sex
-    breakpoints_df[start_row:end_row, "time"] <- time_points[time_idx]  # Assign current time point
+    breakpoints_df[start_row:end_row, "time"] <- time_points[time_idx] # Assign current time point
 
     # Iterate over each individual within the current time point
     for (individual_idx in 1:num_individuals) {

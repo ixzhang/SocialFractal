@@ -76,8 +76,8 @@ clumping_rate <- function(data, individuals, threshold) {
   close_contact[close_contact > threshold] <- 0
 
   # Compute the sum of close contacts and any contacts
-  close_sum <- apply((close_contact), c(1,2), sum, na.rm = TRUE)
-  any_sum <- apply((any_contact), c(1,2), sum, na.rm = TRUE)
+  close_sum <- apply((close_contact), c(1, 2), sum, na.rm = TRUE)
+  any_sum <- apply((any_contact), c(1, 2), sum, na.rm = TRUE)
 
   # Calculate the clumping rate matrix
   clumping_matrix <- close_sum / any_sum

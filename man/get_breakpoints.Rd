@@ -23,7 +23,7 @@ The result is a matrix containing breakpoints for each individual at each time p
 \examples{
 # Example usage:
 # Assuming 'social_network_data' is a 3D array with dimensions [individuals, individuals, time]
-sex.information <- zf_ind$sex[match(dimnames(zf_rep1_real)[[1]], zf_ind$QR)
+sex.information <- zf_ind$sex[match(dimnames(zf_rep1_real)[[1]], zf_ind$QR)]
 breakpoints <- get_breakpoints(social_networks = zf_rep1_real, sex = sex.information, break_num = 3)
 print(breakpoints)
 }
