@@ -5,8 +5,10 @@
 #' The result is a matrix containing breakpoints for each individual
 #' at each time point.
 #'
+#' @import BAMMtools
+#'
 #' @param social_networks A 3D array with dimensions
-#' [individuals, individuals, time points].
+#' Dimensions: individuals, individuals, time points.
 #' @param sex The sex information of the zebra finches in social networks.
 #' Default is NA.
 #' @param break_num The number of breaks (clusters) to compute. Default is 3.
@@ -17,14 +19,12 @@
 #' @examples
 #' # Example usage:
 #' # Assuming 'social_network_data' is a 3D array with dimensions
-#' # [individuals, individuals, time]
+#' # individuals, individuals, time
 #' sex.information <- zf_ind$sex[match(dimnames(zf_rep1_real)[[1]], zf_ind$QR)]
 #' breakpoints <- get_breakpoints(social_networks = zf_rep1_real,
 #' sex = sex.information, break_num = 3)
 #' print(breakpoints)
 get_breakpoints <- function(social_networks, sex = NA, break_num = 3) {
-  require(BAMMtools)
-
   # Extract individual IDs and time points from the array's dimension names
   individual_ids <- dimnames(social_networks)[[1]] # Individuals' identifiers
   time_points <- dimnames(social_networks)[[3]] # Time points in the data

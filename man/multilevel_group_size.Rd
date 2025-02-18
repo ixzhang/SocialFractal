@@ -7,18 +7,24 @@
 multilevel_group_size(social_networks)
 }
 \arguments{
-\item{social_networks}{A 3D array containing social network data. Dimensions: \link{individuals, connections, time}.}
+\item{social_networks}{A 3D array containing social network data.
+Dimensions: individuals, individuals, time points.}
 }
 \value{
-A data.frame with columns for time, level, individual_num, group_num, and group_size (individual_num / group_num).
+A data.frame with columns for time, level, individual_num, group_num,
+and group_size (individual_num / group_num).
 }
 \description{
-This function computes the group size across different hierarchical levels for a social network evolving over time.
-It uses the Louvain community detection algorithm to identify communities at each time point and calculates group sizes based on the membership structure.
+This function computes the group size across different hierarchical levels
+for a social network evolving over time.
+It uses the Louvain community detection algorithm to identify communities at
+each time point and calculates group sizes based on the membership structure.
 }
 \examples{
 # Example usage:
-# Assuming 'social_network_data' is a 3D array with dimensions [individuals, individuals, time]
+# Assuming 'social_network_data' is a 3D array with dimensions
+# [individuals, individuals, time]
+social_network_data <- data(zf_rep1_real)
 group_sizes <- multilevel_group_size(social_network_data)
 print(group_sizes)
 }

@@ -5,6 +5,8 @@
 #' The clumping rate is defined as the ratio of interactions within a given
 #' threshold to the total number of interactions.
 #'
+#' @import stats
+#'
 #' @param data A data.frame containing spatial coordinates and time information.
 #' Columns: id, x, y, time.
 #' @param individuals A vector of unique individual identifiers.
@@ -16,12 +18,12 @@
 #' @examples
 #' # Example usage:
 #' # Assuming 'spatial_data' is a data.frame with columns 'id', 'x', 'y', 'time'
-#' data(raw_data)
-#' data(zf_ind)
-#' cr_matrix <- clumping_rate(raw_data,
-#' individuals = zf_ind$Ind_ID[zf_ind$Replicate == 1],
-#' threshold = 75)
-#' print(cr_matrix)
+#' # data(raw_data)
+#' # data(zf_ind)
+#' # cr_matrix <- clumping_rate(raw_data,
+#' # individuals = zf_ind$Ind_ID[zf_ind$Replicate == 1],
+#' # threshold = 75)
+#' # print(cr_matrix)
 clumping_rate <- function(data, individuals, threshold) {
   # Extract unique time points and split data by time
   time_points <- unique(data$time)
@@ -56,7 +58,7 @@ clumping_rate <- function(data, individuals, threshold) {
       current_data <- current_data[order(current_data$id), ]
 
       # Compute pairwise Euclidean distances
-      distance_matrix <- as.matrix(dist(current_data[, c("x", "y")]))
+      distance_matrix <- as.matrix(stats::dist(current_data[, c("x", "y")]))
       diag(distance_matrix) <- NA
 
       # Map row indices to the global individual order

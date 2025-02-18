@@ -5,6 +5,8 @@
 #' using Jenks breaks. It calculates the proportion of variance explained
 #' by the grouped data compared to the original data.
 #'
+#' @import BAMMtools
+#'
 #' @param data A numeric vector of observed values.
 #' @param num_breaks An integer specifying the number of groups to
 #' classify the data into.
@@ -19,12 +21,6 @@
 #' gvf_result <- gvf(data, num_breaks = 5)
 #' # Output the result
 gvf <- function(data, num_breaks) {
-  # Check if BAMMtools package is installed and loaded
-  if (!requireNamespace("BAMMtools", quietly = TRUE)) {
-    stop("BAMMtools package is needed for this function to work.
-         Please install it using install.packages(\"BAMMtools\").")
-  }
-
   # Calculate Jenks breaks using BAMMtools package
   breaks <- BAMMtools::getJenksBreaks(data, num_breaks)
 

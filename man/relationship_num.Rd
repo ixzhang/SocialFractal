@@ -7,20 +7,28 @@
 relationship_num(social_networks, breakpoints_df)
 }
 \arguments{
-\item{social_networks}{A 3D array containing social network data. Dimensions: \link{individuals, individuals, time}}
+\item{social_networks}{A 3D array containing social network data.
+Dimensions: individuals, individuals, time points}
 
-\item{breakpoints_df}{A data.frame containing Jenks breakpoints for each individual and time point.}
+\item{breakpoints_df}{A data.frame containing Jenks breakpoints
+for each individual and time point.}
 }
 \value{
-A data.frame with relationship counts for each tier and gender category.
+A data.frame with relationship counts for each tier and
+gender category.
 }
 \description{
-This function computes the number of relationships in different tiers for each individual across time points.
-The relationships are categorized based on Jenks breakpoints and gender (same or different sex).
+This function computes the number of relationships in different tiers
+for each individual across time points.
+The relationships are categorized based on Jenks breakpoints and
+gender (same or different sex).
 }
 \examples{
 # Example usage:
-# Assuming 'social_network_data' and 'breakpoints_df' are properly formatted
-relationships <- relationship_num(social_network_data, breakpoints_df)
+data(zf_rep1_real)
+sex.information <- zf_ind$sex[match(dimnames(zf_rep1_real)[[1]], zf_ind$QR)]
+breakpoints <- get_breakpoints(zf_rep1_real,
+sex = sex.information, break_num = 3)
+relationships <- relationship_num(zf_rep1_real, breakpoints)
 print(relationships)
 }

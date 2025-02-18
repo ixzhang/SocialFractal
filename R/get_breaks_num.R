@@ -18,7 +18,8 @@
 #' @examples
 #' # Example usage:
 #' # Assuming 'social_network_data' is a 3D array with dimensions
-#' [individuals, individuals, time]
+#' # [individuals, individuals, time]
+#' social_network_data <- data(zf_rep1_real)
 #' result <- get_breaks_num(social_network_data, max_breaks = 5)
 #' # Explore the results to determine the optimal number of breaks
 get_breaks_num <- function(social_networks, max_breaks = 5) {

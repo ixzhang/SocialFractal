@@ -5,8 +5,10 @@
 #' It uses the Louvain community detection algorithm to identify communities at
 #' each time point and calculates group sizes based on the membership structure.
 #'
-#' @param social_networks A 3D array containing social network data. Dimensions:
-#' [individuals, connections, time].
+#' @import igraph
+#'
+#' @param social_networks A 3D array containing social network data.
+#' Dimensions: individuals, individuals, time points.
 #' @return A data.frame with columns for time, level, individual_num, group_num,
 #' and group_size (individual_num / group_num).
 #' @export
@@ -15,11 +17,10 @@
 #' # Example usage:
 #' # Assuming 'social_network_data' is a 3D array with dimensions
 #' # [individuals, individuals, time]
+#' social_network_data <- data(zf_rep1_real)
 #' group_sizes <- multilevel_group_size(social_network_data)
 #' print(group_sizes)
 multilevel_group_size <- function(social_networks) {
-  require(igraph)
-
   # Extract time points from the social network's dimension names
   time_points <- dimnames(social_networks)[[3]]
 

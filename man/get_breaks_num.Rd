@@ -8,21 +8,28 @@ get_breaks_num(social_networks, max_breaks = 5)
 }
 \arguments{
 \item{social_networks}{A 3D array containing social network data over time.
-Dimensions are individuals (first/second dimension), and time points (third dimension).}
+Dimensions are individuals (first/second dimension),
+and time points (third dimension).}
 
 \item{max_breaks}{The maximum number of breaks to consider. Default is 5.}
 }
 \value{
-A data frame containing the GVF values for different numbers of breaks across individuals and time points.
+A data frame containing the GVF values for different numbers of
+breaks across individuals and time points.
 }
 \description{
-This function optimizes the number of breaks for a given dataset using the Jenks natural breaks algorithm.
-It iterates over different numbers of breaks and calculates the Goodness of Variance Fit (GVF) for each combination of individual and time point.
-The GVF metric helps determine the number of breaks that best represents the data structure while minimizing variance within groups.
+This function optimizes the number of breaks for a given dataset using the
+Jenks natural breaks algorithm.
+It iterates over different numbers of breaks and calculates the Goodness of
+Variance Fit (GVF) for each combination of individual and time point.
+The GVF metric helps determine the number of breaks that best represents the
+data structure while minimizing variance within groups.
 }
 \examples{
 # Example usage:
-# Assuming 'social_network_data' is a 3D array with dimensions [individuals, individuals, time]
+# Assuming 'social_network_data' is a 3D array with dimensions
+# [individuals, individuals, time]
+social_network_data <- data(zf_rep1_real)
 result <- get_breaks_num(social_network_data, max_breaks = 5)
 # Explore the results to determine the optimal number of breaks
 }

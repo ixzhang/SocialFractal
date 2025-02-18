@@ -18,6 +18,7 @@ Generated from XYZ
 zf_rep1_real
 }
 \description{
-This dataset contains the clumping social networks of zebra finches in Replicate 1 during 30 days.
+This dataset contains the clumping social networks of
+zebra finches in Replicate 1 during 30 days.
 }
 \keyword{datasets}

@@ -7,24 +7,30 @@
 clumping_rate(data, individuals, threshold)
 }
 \arguments{
-\item{data}{A data.frame containing spatial coordinates and time information. Columns: id, x, y, time.}
+\item{data}{A data.frame containing spatial coordinates and time information.
+Columns: id, x, y, time.}
 
 \item{individuals}{A vector of unique individual identifiers.}
 
-\item{threshold}{The spatial threshold (in the units of x and y) to determine close contacts.}
+\item{threshold}{The spatial threshold (in the units of x and y) to
+determine close contacts.}
 }
 \value{
 A matrix representing the clumping rate between individuals.
 }
 \description{
-This function calculates the clumping rate in a social network based on spatial proximity over time.
-The clumping rate is defined as the ratio of interactions within a given threshold to the total number of interactions.
+This function calculates the clumping rate in a social network based on
+spatial proximity over time.
+The clumping rate is defined as the ratio of interactions within a given
+threshold to the total number of interactions.
 }
 \examples{
 # Example usage:
 # Assuming 'spatial_data' is a data.frame with columns 'id', 'x', 'y', 'time'
-data(raw_data)
-data(zf_ind)
-cr_matrix <- clumping_rate(raw_data, individuals = zf_ind$Ind_ID[zf_ind$Replicate == 1], threshold = 75)
-print(cr_matrix)
+# data(raw_data)
+# data(zf_ind)
+# cr_matrix <- clumping_rate(raw_data,
+# individuals = zf_ind$Ind_ID[zf_ind$Replicate == 1],
+# threshold = 75)
+# print(cr_matrix)
 }

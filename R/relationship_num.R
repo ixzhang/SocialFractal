@@ -4,8 +4,9 @@
 #' for each individual across time points.
 #' The relationships are categorized based on Jenks breakpoints and
 #' gender (same or different sex).
+#'
 #' @param social_networks A 3D array containing social network data.
-#' Dimensions: [individuals, individuals, time]
+#' Dimensions: individuals, individuals, time points
 #' @param breakpoints_df A data.frame containing Jenks breakpoints
 #' for each individual and time point.
 #'
@@ -15,8 +16,11 @@
 #'
 #' @examples
 #' # Example usage:
-#' # Assuming 'social_network_data' and 'breakpoints_df' are properly formatted
-#' relationships <- relationship_num(social_network_data, breakpoints_df)
+#' data(zf_rep1_real)
+#' sex.information <- zf_ind$sex[match(dimnames(zf_rep1_real)[[1]], zf_ind$QR)]
+#' breakpoints <- get_breakpoints(zf_rep1_real,
+#' sex = sex.information, break_num = 3)
+#' relationships <- relationship_num(zf_rep1_real, breakpoints)
 #' print(relationships)
 relationship_num <- function(social_networks, breakpoints_df) {
   # Extract individual IDs and time points from social_networks
