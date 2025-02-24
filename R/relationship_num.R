@@ -38,7 +38,7 @@ relationship_num <- function(social_networks, breakpoints_df) {
   relationship_df <- breakpoints_df[, c("ID", "time", "sex")]
 
   # Iterate over each row in the relationship data.frame
-  for (i in seq_along(relationship_df)) {
+  for (i in seq_along(relationship_df$ID)) {
     current_id <- relationship_df$ID[i]
     current_sex <- relationship_df$sex[i]
     current_time <- relationship_df$time[i]
