@@ -75,6 +75,9 @@ get_breakpoints <- function(social_networks, sex = NA, break_num = 3) {
         next
       }
 
+      interaction_values <- interaction_values /
+        mean(interaction_values, na.rm = TRUE)
+
       # Calculate Jenks natural breakpoints for the current set of
       # interaction values
       # Note: The function 'getJenksBreaks' returns 'break_num + 2' breakpoints
