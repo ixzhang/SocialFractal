@@ -16,7 +16,8 @@ RoxygenNote: 7.3.2
 Depends: 
     R (>= 3.5),
     BAMMtools (>= 2.1.12),
-    igraph (>= 2.1.4)
+    igraph (>= 2.1.4),
+    assortnet (>= 0.20)
 LazyData: true
 LazyDataCompression: xz
 Suggests: 
